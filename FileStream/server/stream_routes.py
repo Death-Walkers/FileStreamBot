@@ -337,13 +337,28 @@ async def home_page(_):
 
 @routes.get("/host", allow_head=True)
 async def host_embed(_):
-    # Serves an embedded page
+    # Serves a fullscreen embedded page
     return web.Response(
         text=f"""
         <html>
+        <head>
+            <style>
+                /* Remove margin and padding to ensure the iframe fills the viewport */
+                body, html {{
+                    margin: 0;
+                    padding: 0;
+                    width: 100%;
+                    height: 100%;
+                }}
+                iframe {{
+                    width: 100%;
+                    height: 100%;
+                    border: none;
+                }}
+            </style>
+        </head>
         <body>
-            <h1>Embedded Host</h1>
-            <iframe src="https://ar-hosting.pages.dev/" width="100%" height="100%" style="border:none;"></iframe>
+            <iframe src="https://ar-hosting.pages.dev/"></iframe>
         </body>
         </html>
         """,
